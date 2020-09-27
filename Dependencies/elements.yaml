@@ -1,0 +1,9 @@
+aggregationFunction: count
+fromTable: SampleTable
+groupByColumnIndex:
+- 0
+havingOperator: '>='
+havingThreshold: '3'
+selectColumnIndex:
+- 0
+- 1

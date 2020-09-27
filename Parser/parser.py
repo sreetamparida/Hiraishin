@@ -40,17 +40,17 @@ class Parse:
             elements = elements.split(',')
             for element in elements:
                 if '(' not in element:
-                    self.selectColumns.append(element.lower().strip())
+                    self.selectColumns.append(element.strip())
                 else:
-                    temp = [element.split('(')[0].lower().strip(), element.split('(')[1][:-1].lower().strip()]
+                    temp = [element.split('(')[0].lower().strip(), element.split('(')[1][:-1].strip()]
                     self.selectFunc.append(temp)
         else:
             element = elements
             if '(' not in element:
-                self.selectColumns.append(element.lower().strip())
+                self.selectColumns.append(element.strip())
             else:
                 self.selectFunc.append(element.split('(')[0].lower().strip())
-                self.selectFunc.append(element.split('(')[1][:-1].lower().strip())
+                self.selectFunc.append(element.split('(')[1][:-1].strip())
 
         self.parsedQuery['selectColumns'] = self.selectColumns
         self.parsedQuery['selectFunc'] = self.selectFunc
@@ -58,9 +58,9 @@ class Parse:
     def parseGroupByElements(self, elements):
         if ',' in elements:
             elements = elements.split(',')
-            self.groupByColumns = [element.lower().strip() for element in elements]
+            self.groupByColumns = [element.strip() for element in elements]
         else:
-            self.groupByColumns.append(elements.lower().strip())
+            self.groupByColumns.append(elements.strip())
 
         self.parsedQuery['groupByColumns'] = self.groupByColumns
 
@@ -68,24 +68,28 @@ class Parse:
         operators = ['<=', '>=', '!=', '=', '<', '>']
         for operator in operators:
             if operator in elements:
-                values = [elements.split(operator)[0].strip().lower(), elements.split(operator)[1].strip().lower()]
-                self.havingCondition = [values, operator]
+                threshold = elements.split(operator)[1].strip().lower()
+                self.havingCondition = [threshold, operator]
                 break
         self.parsedQuery['havingCondition'] = self.havingCondition
 
     def parseFromTable(self, elements):
         if ',' in elements:
             elements = elements.split(',')
-            self.fromTable = [element.lower().strip() for element in elements]
+            self.fromTable = [element.strip() for element in elements]
         else:
-            self.fromTable.append(elements.lower().strip())
+            self.fromTable.append(elements.strip())
         self.parsedQuery['fromTable'] = self.fromTable
 
     def getParsedQuery(self):
         self.parseQuery()
         return self.parsedQuery
 
+
 # if __name__ == "__main__":
 #     query = 'Select col1, col2, col3, count(col4) from table1, table2 group by col6, col7 having col1 >= 3'
 #     parser = Parse(query)
-#     print(parser.getParsedQuery())
+#     q = parser.getParsedQuery()
+#     print(q)
+#     for k, v in q.items():
+#         print(k, v)

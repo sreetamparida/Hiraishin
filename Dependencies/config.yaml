@@ -1,0 +1,4 @@
+hadoop_streaming_jar: ~/hadoop-3.2.1/hadoop-streaming-3.2.1.jar
+input_dir: input
+output_dir: output
+initiate_command: hadoop dfs -rm -r output
