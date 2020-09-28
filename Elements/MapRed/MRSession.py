@@ -1,4 +1,5 @@
 import os
+import time
 
 
 class MRSession:
@@ -20,4 +21,7 @@ class MRSession:
             table=self.fromTable,
             output_dir=self.config['output_dir'],
             element_path=self.config['element_path'])
+        start = time.time()
         os.system(cmd)
+        timeTaken = time.time() - start
+        return timeTaken
