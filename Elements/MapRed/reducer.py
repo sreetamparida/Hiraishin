@@ -30,9 +30,13 @@ class Reducer:
 
     def performOperation(self, havingOperator, havingThreshold, aggregationFunction, data):
         for column in data:
-            value = self.operate[aggregationFunction](data[column])
-            if self.operate[havingOperator](value, int(havingThreshold)):
-                print(str(column) + ', ' + str(value))
+            if aggregationFunction == 'count':
+                aggregateValue = self.func[aggregationFunction](data[column])
+            else:
+                values = [int(value) for value in data[column]]
+                aggregateValue = self.func[aggregationFunction](values)
+            if self.operate[havingOperator](aggregateValue, int(havingThreshold)):
+                print(str(column) + ', ' + str(aggregateValue))
 
     def reduce(self):
         for row in sys.stdin:

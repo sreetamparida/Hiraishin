@@ -24,6 +24,5 @@ class Mapper:
 if __name__ == '__main__':
     with open('Dependencies/elements.yaml', 'r') as file:
         elements = yaml.load(file, Loader=yaml.FullLoader)
-    print(elements)
     mapper = Mapper(elements)
     mapper.execute()
