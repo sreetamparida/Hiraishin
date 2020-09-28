@@ -10,7 +10,7 @@ class MRSession:
     def executeQuery(self):
         initiate_command = self.config['initiate_command']
         os.system(initiate_command)
-        cmd = 'hadoop jar {hadoop_streaming_jar} -file Hiraishin/Dependencies/elements.json -file {mapper_path} ' \
+        cmd = 'hadoop jar {hadoop_streaming_jar} -file Dependencies/elements.json -file {mapper_path} ' \
               '-mapper mapper.py -file {reducer_path} -reducer reducer.py -input /{input_dir}/{table}.csv -output ' \
               '{output_dir}'.format(
             hadoop_streaming_jar=self.config['hadoop_streaming_jar'],
