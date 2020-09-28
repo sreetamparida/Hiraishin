@@ -3,5 +3,7 @@ mapper_path: Elements/MapRed/mapper.py
 reducer_path: Elements/MapRed/reducer.py
 input_dir: /Hiraishin/input
 output_dir: /Hiraishin/output
-initiate_command: hdfs dfs -rm -r /Hiraishin/output
+clean_hdfs: hdfs dfs -rm -r /Hiraishin/output
 element_path: Dependencies/elements.json
+local_output_dir: Dependencies/map_red_output
+clean_directory: rm -r -f Dependencies/map_red_output/

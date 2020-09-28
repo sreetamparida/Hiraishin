@@ -9,8 +9,7 @@ class MRSession:
         self.fromTable = fromTable
 
     def executeQuery(self):
-        initiate_command = self.config['initiate_command']
-        os.system(initiate_command)
+
         cmd = 'hadoop jar {hadoop_streaming_jar} -file {element_path} -file {mapper_path} ' \
               '-mapper mapper.py -file {reducer_path} -reducer reducer.py -input {input_dir}/{table}.csv -output ' \
               '{output_dir}'.format(

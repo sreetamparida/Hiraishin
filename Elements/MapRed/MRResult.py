@@ -11,10 +11,12 @@ class MRResult:
         self.timeTaken = timeTaken
 
     def getResult(self):
-        cmd = 'hdfs dfs -get {outputDir} ~/map_red_output'.format(outputDir=self.config['output_dir'])
+        cmd = 'hdfs dfs -get {outputDir} {localOutputDir}'.format(outputDir=self.config['output_dir'],
+                                                                  localOutputDir=self.config['local_output_dir'])
         os.system(cmd)
 
-        with open('~/map_red_output/part-00000', 'r') as f:
+        localFilePath = '{localOutputDir}/part-00000'.format(localOutputDir=self.config['local_output_dir'])
+        with open(localFilePath, 'r') as f:
             results = f.readlines()
 
         for result in results:
@@ -27,6 +29,11 @@ class MRResult:
 
         self.mrResult['result'] = self.queryResult
         self.mrResult['timeTaken'] = self.timeTaken
+
+        cleanDirectory = self.config['clean_directory']
+        cleanHDFS = self.config['clean_hdfs']
+        os.system(cleanDirectory)
+        os.system(cleanHDFS)
 
         return self.mrResult
 
