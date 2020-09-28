@@ -114,7 +114,7 @@ class Parse:
             'havingThreshold': havingThreshold
         }
 
-        with open('Dependencies/elements.json', 'w') as target:
+        with open('Hiraishin/Dependencies/elements.json', 'w') as target:
             json.dump(elements, target)
 
 

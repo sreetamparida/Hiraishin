@@ -14,9 +14,9 @@ class Driver:
 
     def getDependencies(self):
 
-        with open('Dependencies/schema.yaml', 'r') as file:
+        with open('Hiraishin/Dependencies/schema.yaml', 'r') as file:
             self.schema = yaml.load(file, Loader=yaml.FullLoader)
-        with open('Dependencies/config.yaml', 'r') as file:
+        with open('Hiraishin/Dependencies/config.yaml', 'r') as file:
             self.config = yaml.load(file, Loader=yaml.FullLoader)
         self.parsedQuery = Parse(self.query, self.schema).getParsedQuery()
 
