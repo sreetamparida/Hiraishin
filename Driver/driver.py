@@ -21,8 +21,7 @@ class Driver:
     def run(self):
         self.getDependencies()
         mrSession = MRSession(self.config, self.parsedQuery['fromTable'][0])
-        cmd = mrSession.executeQuery()
-        return cmd
+        mrSession.executeQuery()
 
 # if __name__ == '__main__':
 #     driver = Driver()

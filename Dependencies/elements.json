@@ -1,0 +1,1 @@
+{"selectColumnIndex": [0], "aggregationFunction": "sum", "selectFuncColumnIndex": 4, "fromTable": "SampleTable", "groupByColumnIndex": [0], "havingOperator": ">=", "havingThreshold": "12000"}
