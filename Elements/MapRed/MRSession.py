@@ -19,4 +19,4 @@ class MRSession:
             input_dir=self.config['input_dir'],
             table=self.fromTable,
             output_dir=self.config['output_dir'])
-        os.system(cmd)
+        return cmd

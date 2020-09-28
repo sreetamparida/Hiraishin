@@ -94,7 +94,7 @@ class Parse:
     def assignQueryElements(self):
 
         fromTable = self.parsedQuery['fromTable'][0]
-        columns = list(self.schema[fromTable].keys())
+        columns = list(self.schema[fromTable])
         for column in self.parsedQuery['selectColumns']:
             self.selectColumnIndex.append(columns.index(column))
         selectFuncColumnIndex = columns.index(self.parsedQuery['selectFunc'][0][1])

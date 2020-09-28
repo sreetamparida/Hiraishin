@@ -1,6 +1,6 @@
 SampleTable:
-  Column1: StringType
-  Column2: StringType
-  Column3: StringType
-  Column4: StringType
-  Column5: IntegerType
+-'Column1'
+-'Column2'
+-'Column3'
+-'Column4'
+-'Column5'
