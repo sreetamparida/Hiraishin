@@ -1,6 +1,6 @@
 SampleTable:
--'Column1'
--'Column2'
--'Column3'
--'Column4'
--'Column5'
+- 'Column1'
+- 'Column2'
+- 'Column3'
+- 'Column4'
+- 'Column5'

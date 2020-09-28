@@ -11,9 +11,7 @@ class Driver:
         self.schema = {}
         self.config = {}
 
-
     def getDependencies(self):
-
         with open('Hiraishin/Dependencies/schema.yaml', 'r') as file:
             self.schema = yaml.load(file, Loader=yaml.FullLoader)
         with open('Hiraishin/Dependencies/config.yaml', 'r') as file:
