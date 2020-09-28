@@ -11,19 +11,18 @@ class Driver:
         self.schema = {}
         self.config = {}
 
-    def getParsedQuery(self):
-        self.parsedQuery = Parse(self.query).getParsedQuery()
-        return self.parsedQuery
 
     def getDependencies(self):
+
         with open('Dependencies/schema.yaml', 'r') as file:
             self.schema = yaml.load(file, Loader=yaml.FullLoader)
         with open('Dependencies/config.yaml', 'r') as file:
             self.config = yaml.load(file, Loader=yaml.FullLoader)
+        self.parsedQuery = Parse(self.query, self.schema).getParsedQuery()
 
     def run(self):
         self.getDependencies()
-        mrSession = MRSession(self.getParsedQuery(), self.schema, self.config)
+        mrSession = MRSession(self.config)
         mrSession.executeQuery()
 
 # if __name__ == '__main__':

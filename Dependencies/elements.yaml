@@ -6,4 +6,4 @@ havingOperator: '>='
 havingThreshold: '3'
 selectColumnIndex:
 - 0
-- 1
+selectFuncColumnIndex: 3

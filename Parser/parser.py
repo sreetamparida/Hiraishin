@@ -1,9 +1,13 @@
+import yaml
+
 TAGS = ['select', 'from', 'group', 'having']
 
 
 class Parse:
 
-    def __init__(self, query):
+    def __init__(self, query, schema):
+        self.groupByColumnIndex = []
+        self.selectColumnIndex = []
         self.parsedQuery = {}
         self.query = query
         self.selectColumns = []
@@ -11,6 +15,7 @@ class Parse:
         self.fromTable = []
         self.groupByColumns = []
         self.havingCondition = []
+        self.schema = schema
 
     def buildQueryElements(self):
         query = self.query
@@ -83,7 +88,34 @@ class Parse:
 
     def getParsedQuery(self):
         self.parseQuery()
+        self.assignQueryElements()
         return self.parsedQuery
+
+    def assignQueryElements(self):
+
+        fromTable = self.parsedQuery['fromTable'][0]
+        columns = list(self.schema[fromTable].keys())
+        for column in self.parsedQuery['selectColumns']:
+            self.selectColumnIndex.append(columns.index(column))
+        selectFuncColumnIndex = columns.index(self.parsedQuery['selectFunc'][0][1])
+        aggregationFunction = self.parsedQuery['selectFunc'][0][0]
+        for column in self.parsedQuery['groupByColumns']:
+            self.groupByColumnIndex.append(columns.index(column))
+        havingOperator = self.parsedQuery['havingCondition'][1]
+        havingThreshold = self.parsedQuery['havingCondition'][0]
+
+        elements = {
+            'selectColumnIndex': self.selectColumnIndex,
+            'aggregationFunction': aggregationFunction,
+            'selectFuncColumnIndex': selectFuncColumnIndex,
+            'fromTable': fromTable,
+            'groupByColumnIndex': self.groupByColumnIndex,
+            'havingOperator': havingOperator,
+            'havingThreshold': havingThreshold
+        }
+
+        with open('Dependencies/elements.yaml', 'w') as target:
+            yaml.dump(elements, target)
 
 
 # if __name__ == "__main__":
