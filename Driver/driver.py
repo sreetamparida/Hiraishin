@@ -7,7 +7,7 @@ class Driver:
 
     def __init__(self, query):
         self.query = query
-        self.parsedQuery = ''
+        self.parsedQuery = {}
         self.schema = {}
         self.config = {}
 
@@ -22,7 +22,7 @@ class Driver:
 
     def run(self):
         self.getDependencies()
-        mrSession = MRSession(self.config)
+        mrSession = MRSession(self.config, self.parsedQuery['fromTable'][0])
         mrSession.executeQuery()
 
 # if __name__ == '__main__':

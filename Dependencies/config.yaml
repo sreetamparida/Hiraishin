@@ -1,4 +1,6 @@
-hadoop_streaming_jar: ~/hadoop-3.2.1/hadoop-streaming-3.2.1.jar
-input_dir: input
-output_dir: output
-initiate_command: hadoop dfs -rm -r output
+hadoop_streaming_jar: Dependencies/hadoop-streaming-3.2.1.jar
+mapper_path: Elements/MapRed/mapper.py
+reducer_path: Elements/MapRed/reducer.py
+input_dir: /Hiraishin/input
+output_dir: /Hiraishin/output
+initiate_command: hadoop dfs -rm -r /Hiraishin/output
