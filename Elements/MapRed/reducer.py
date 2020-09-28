@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """reducer.py"""
 import operator
-import yaml
+import json
 import sys
 
 
@@ -36,11 +36,11 @@ class Reducer:
                 values = [int(value) for value in data[column]]
                 aggregateValue = self.func[aggregationFunction](values)
             if self.operate[havingOperator](aggregateValue, int(havingThreshold)):
-                print(str(column) + ', ' + str(aggregateValue))
+                print(str(column) + '\t' + str(aggregateValue))
 
     def reduce(self):
         for row in sys.stdin:
-            row = row.strip().split('|')
+            row = row.strip().split('\t')
             if row[0] not in self.data:
                 self.data[row[0]] = [row[1]]
             else:
@@ -49,8 +49,8 @@ class Reducer:
 
 
 if __name__ == '__main__':
-    with open('Dependencies/elements.yaml', 'r') as file:
-        elements = yaml.load(file, Loader=yaml.FullLoader)
+    with open('elements.json', 'r') as file:
+        elements = json.load(file)
 
     reducer = Reducer(elements)
     reducer.reduce()

@@ -1,4 +1,4 @@
-import yaml
+import json
 
 TAGS = ['select', 'from', 'group', 'having']
 
@@ -114,8 +114,8 @@ class Parse:
             'havingThreshold': havingThreshold
         }
 
-        with open('Dependencies/elements.yaml', 'w') as target:
-            yaml.dump(elements, target)
+        with open('Dependencies/elements.json', 'w') as target:
+            json.dump(elements, target)
 
 
 # if __name__ == "__main__":
