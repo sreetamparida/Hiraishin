@@ -38,7 +38,12 @@ class Sparkler:
     def executeQuery(self, parsedQuery, structureField, fromTable):
         start = time.time()
         table = self.loadData(structureField, fromTable)
-        groupByResult = table.groupBy(parsedQuery['groupByColumns'])
+        whereCondition = '{whereColumn}=={whereValue}'.format(
+            whereColumn=parsedQuery['whereColumn'],
+            whereValue=parsedQuery['whereValue']
+        )
+        whereResult = table.where(whereCondition)
+        groupByResult = whereResult.groupBy(parsedQuery['groupByColumns'])
         aggResult = groupByResult.agg({str(parsedQuery['selectFunc'][0][1]): str(parsedQuery['selectFunc'][0][0])})
         havingCondition = '{selectFunc}({column}){havingOperator}{havingThreshold}'.format(
             selectFunc=parsedQuery['selectFunc'][0][0],
