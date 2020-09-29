@@ -1,10 +1,9 @@
 import time
 import json
 import findspark
+findspark.init()
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-
-findspark.init()
 
 
 class Sparkler:
