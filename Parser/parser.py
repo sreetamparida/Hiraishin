@@ -96,7 +96,7 @@ class Parse:
 
     def getParsedQuery(self):
         self.parseQuery()
-        # self.assignQueryElements()
+        self.assignQueryElements()
         return self.parsedQuery
 
     def assignQueryElements(self):
