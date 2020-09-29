@@ -91,12 +91,12 @@ class Parse:
         elements = elements.strip().split('=')
         whereValue = elements[1].strip()
         whereColumn = elements[0].strip()
-        self.parsedQuery['whereValue'] = whereValue
+        self.parsedQuery['whereValue'] = whereValue.strip('"')
         self.parsedQuery['whereColumn'] = whereColumn
 
     def getParsedQuery(self):
         self.parseQuery()
-        self.assignQueryElements()
+        # self.assignQueryElements()
         return self.parsedQuery
 
     def assignQueryElements(self):
@@ -130,6 +130,11 @@ class Parse:
             json.dump(elements, target)
 
 
-# if __name__ == "__main__": query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2 = value
-# group by col6, col7 having col1 >= 3' parser = Parse(query, {'hello':'test'}) q = parser.getParsedQuery() print(q)
-# for k, v in q.items(): print(k, v)
+# if __name__ == "__main__":
+#     query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2 =
+#     "value" group by col6, col7 having col1 >= 3'
+#     parser = Parse(query, {'hello':'test'})
+#     q = parser.getParsedQuery()
+#     print(q)
+    # for k, v in q.items():
+    #     print(k, v)
