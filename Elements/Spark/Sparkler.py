@@ -1,6 +1,10 @@
 import time
+import json
+import findspark
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+findspark.init()
 
 
 class Sparkler:
@@ -44,12 +48,11 @@ class Sparkler:
             havingThreshold=parsedQuery['havingCondition'][0]
         )
         havingResult = aggResult.where(havingCondition)
-        self.timeTaken = time.time()-start
+        havingResult = havingResult.toJSON().map(lambda j: json.loads(j)).collect()
+        self.timeTaken = time.time() - start
         self.sparkResult = {
             'result': havingResult,
             'timeTaken': self.timeTaken,
             'transformationActions': self.actions
         }
         return self.sparkResult
-
-
