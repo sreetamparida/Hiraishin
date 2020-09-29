@@ -1,6 +1,6 @@
 import json
 
-TAGS = ['select', 'from', 'group', 'having']
+TAGS = ['select', 'from', 'where', 'group', 'having']
 
 
 class Parse:
@@ -37,8 +37,9 @@ class Parse:
         queryElements = self.buildQueryElements()
         self.parseSelectElements(queryElements[0])
         self.parseFromTable(queryElements[1])
-        self.parseGroupByElements(queryElements[2])
-        self.parseHavingCondition(queryElements[3])
+        self.parseWhereCondition(queryElements[2])
+        self.parseGroupByElements(queryElements[3])
+        self.parseHavingCondition(queryElements[4])
 
     def parseSelectElements(self, elements):
         if ',' in elements:
@@ -86,6 +87,13 @@ class Parse:
             self.fromTable.append(elements.strip())
         self.parsedQuery['fromTable'] = self.fromTable
 
+    def parseWhereCondition(self, elements):
+        elements = elements.strip().split('=')
+        whereValue = elements[1].strip()
+        whereColumn = elements[0].strip()
+        self.parsedQuery['whereValue'] = whereValue
+        self.parsedQuery['whereColumn'] = whereColumn
+
     def getParsedQuery(self):
         self.parseQuery()
         self.assignQueryElements()
@@ -103,12 +111,16 @@ class Parse:
             self.groupByColumnIndex.append(columns.index(column))
         havingOperator = self.parsedQuery['havingCondition'][1]
         havingThreshold = self.parsedQuery['havingCondition'][0]
+        whereValue = self.parsedQuery['whereValue']
+        whereColumnIndex = columns.index(self.parsedQuery['whereColumn'])
 
         elements = {
             'selectColumnIndex': self.selectColumnIndex,
             'aggregationFunction': aggregationFunction,
             'selectFuncColumnIndex': selectFuncColumnIndex,
             'fromTable': fromTable,
+            'whereColumnIndex': whereColumnIndex,
+            'whereValue': whereValue,
             'groupByColumnIndex': self.groupByColumnIndex,
             'havingOperator': havingOperator,
             'havingThreshold': havingThreshold
@@ -118,10 +130,6 @@ class Parse:
             json.dump(elements, target)
 
 
-# if __name__ == "__main__":
-#     query = 'Select col1, col2, col3, count(col4) from table1, table2 group by col6, col7 having col1 >= 3'
-#     parser = Parse(query)
-#     q = parser.getParsedQuery()
-#     print(q)
-#     for k, v in q.items():
-#         print(k, v)
+# if __name__ == "__main__": query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2 = value
+# group by col6, col7 having col1 >= 3' parser = Parse(query, {'hello':'test'}) q = parser.getParsedQuery() print(q)
+# for k, v in q.items(): print(k, v)

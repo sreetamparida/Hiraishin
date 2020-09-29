@@ -10,11 +10,13 @@ class Mapper:
         self.selectColumnIndex = element['selectColumnIndex']
         self.selectFuncColumnIndex = element['selectFuncColumnIndex']
         self.groupByColumnIndex = element['groupByColumnIndex']
+        self.whereColumnIndex = element['whereColumnIndex']
+        self.whereValue = element['whereValue']
 
     def execute(self):
         for row in sys.stdin:
             row = row.strip().split(',')
-            if len(self.selectColumnIndex) == len(self.groupByColumnIndex):
+            if row[self.whereColumnIndex] == self.whereValue:
                 groupByColumns = [row[index] for index in self.groupByColumnIndex]
                 aggregationColumn = row[self.selectFuncColumnIndex]
                 groupByColumns = ','.join(groupByColumns)
