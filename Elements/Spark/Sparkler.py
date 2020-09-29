@@ -10,7 +10,7 @@ class Sparkler:
 
     def __init__(self, config):
         self.sparkResult = None
-        self.actions = ['groupby', 'agg', 'where']
+        self.actions = ['where', 'groupby', 'agg', 'where']
         self.timeTaken = None
         self.config = config
         self.fieldType = {
@@ -38,7 +38,7 @@ class Sparkler:
     def executeQuery(self, parsedQuery, structureField, fromTable):
         start = time.time()
         table = self.loadData(structureField, fromTable)
-        whereCondition = '{whereColumn}=={whereValue}'.format(
+        whereCondition = '{whereColumn}=="{whereValue}"'.format(
             whereColumn=parsedQuery['whereColumn'],
             whereValue=parsedQuery['whereValue']
         )
