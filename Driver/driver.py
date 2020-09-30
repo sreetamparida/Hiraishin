@@ -27,7 +27,7 @@ class Driver:
         with open('Dependencies/structure_field.yaml', 'r') as file:
             self.structureField = yaml.load(file, Loader=yaml.FullLoader)
         self.parsedQuery = Parse(self.query, self.schema).getParsedQuery()
-        self.columns = [','.join(self.parsedQuery['selectColumns']), ' '.join(self.parsedQuery['selectFunc'][0])]
+        self.columns = [','.join(self.parsedQuery['groupByColumns']), ' '.join(self.parsedQuery['selectFunc'][0])]
         self.fromTable = self.parsedQuery['fromTable'][0]
 
     def runMapRed(self):
