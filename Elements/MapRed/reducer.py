@@ -33,9 +33,9 @@ class Reducer:
             if aggregationFunction == 'count':
                 aggregateValue = self.func[aggregationFunction](data[column])
             else:
-                values = [int(value) for value in data[column]]
+                values = [float(value) for value in data[column]]
                 aggregateValue = self.func[aggregationFunction](values)
-            if self.operate[havingOperator](aggregateValue, int(havingThreshold)):
+            if self.operate[havingOperator](aggregateValue, float(havingThreshold)):
                 print(str(column) + '\t' + str(aggregateValue))
 
     def reduce(self):
