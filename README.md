@@ -71,7 +71,7 @@ There are four tables named as
 
 ## System Design
 
-![System Design](https://drive.google.com/file/d/1Rgogjy-hPas12Q9VNHoGmCMn8LQPMv2m/view?usp=sharing)
+![System Design](https://drive.google.com/file/d/1Rgogjy-hPas12Q9VNHoGmCMn8LQPMv2m)
 
 ### Description
 1. User submits query.
