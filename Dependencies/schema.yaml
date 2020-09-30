@@ -4,3 +4,35 @@ SampleTable:
 - 'Column3'
 - 'Column4'
 - 'Column5'
+
+product:
+- 'id'
+- 'ASIN'
+- 'title'
+- 'group'
+- 'salesrank'
+- 'similarCount'
+- 'categoriesCount'
+- 'reviewCount'
+- 'downloads'
+- 'averageRating'
+
+category:
+- 'id'
+- 'productId'
+- 'categoryName'
+- 'categoryId'
+
+reviews:
+- 'id'
+- 'date'
+- 'productId'
+- 'customerId'
+- 'rating'
+- 'votes'
+- 'helpful'
+
+similar:
+- 'id'
+- 'productId'
+- 'similarId'

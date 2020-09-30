@@ -3,7 +3,7 @@ import json
 import findspark
 findspark.init()
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 
 
 class Sparkler:
@@ -15,7 +15,8 @@ class Sparkler:
         self.config = config
         self.fieldType = {
             'IntegerType': IntegerType(),
-            'StringType': StringType()
+            'StringType': StringType(),
+            'FloatType': FloatType()
         }
 
     def initiateSparkler(self):

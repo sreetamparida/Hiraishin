@@ -4,3 +4,35 @@ SampleTable:
   Column3: StringType
   Column4: StringType
   Column5: IntegerType
+
+product:
+    id: IntegerType
+    ASIN: StringType
+    title: StringType
+    group: StringType
+    salesrank: IntegerType
+    similarCount: IntegerType
+    categoriesCount: IntegerType
+    reviewCount: IntegerType
+    downloads: IntegerType
+    averageRating: FloatType
+
+category:
+    id: IntegerType
+    productId: StringType
+    categoryName: StringType
+    categoryId: IntegerType
+
+reviews:
+    id: IntegerType
+    date: StringType
+    productId: StringType
+    customerId: StringType
+    rating: IntegerType
+    votes: IntegerType
+    helpful: IntegerType
+
+similar:
+    id: IntegerType
+    productId: StringType
+    similarId: StringType
