@@ -138,10 +138,10 @@ class Parse:
 
 
 # if __name__ == "__main__":
-#     query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2
-#     ="value" group by col6, col7 having col1 >= 3'
+#     query = 'Select  group, similarCount, count(ASIN) from product where similarCount =
+#     5 group by group having count(ASIN) > 3'
 #     parser = Parse(query, {'hello':'test'})
 #     q = parser.getParsedQuery()
 #     print(q)
-#     # for k, v in q.items():
-#     #     #     print(k, v)
+    # for k, v in q.items():
+    #     #     print(k, v)

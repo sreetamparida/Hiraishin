@@ -9,7 +9,7 @@ product:
 - 'id'
 - 'ASIN'
 - 'title'
-- 'group'
+- 'productGroup'
 - 'salesrank'
 - 'similarCount'
 - 'categoriesCount'

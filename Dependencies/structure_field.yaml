@@ -9,7 +9,7 @@ product:
     id: IntegerType
     ASIN: StringType
     title: StringType
-    group: StringType
+    productGroup: StringType
     salesrank: IntegerType
     similarCount: IntegerType
     categoriesCount: IntegerType
