@@ -17,10 +17,7 @@ class Driver:
         self.SPARK_RESULT = {}
         self.columns = []
         self.fromTable = ''
-        self.QUERY_RESULT = {
-            'MAPREDUCE_RESULT': self.MAP_RED_RESULT,
-            'SPARK_RESULT': self.SPARK_RESULT
-        }
+        self.QUERY_RESULT = {}
 
     def getDependencies(self):
         with open('Dependencies/schema.yaml', 'r') as file:
@@ -45,7 +42,15 @@ class Driver:
     def run(self):
         self.getDependencies()
         self.runMapRed()
+        print('------------- MAPREDUCE   RESULT ---------------')
+        print(self.MAP_RED_RESULT)
         self.runSparkler()
+        print('-------------    SPARK    RESULT ---------------')
+        print(self.SPARK_RESULT)
+        self.QUERY_RESULT = {
+            'MAPREDUCE_RESULT': self.MAP_RED_RESULT,
+            'SPARK_RESULT': self.SPARK_RESULT
+        }
         return self.QUERY_RESULT
 
 # if __name__ == '__main__':
