@@ -88,15 +88,20 @@ class Parse:
         self.parsedQuery['fromTable'] = self.fromTable
 
     def parseWhereCondition(self, elements):
-        elements = elements.strip().split('=')
-        whereValue = elements[1].strip()
-        whereColumn = elements[0].strip()
-        self.parsedQuery['whereValue'] = whereValue.strip('"')
-        self.parsedQuery['whereColumn'] = whereColumn
+        operators = ['<=', '>=', '!=', '=', '<', '>']
+        for operator in operators:
+            if operator in elements:
+                elements = elements.strip().split(operator)
+                whereValue = elements[1].strip()
+                whereColumn = elements[0].strip()
+                self.parsedQuery['whereValue'] = whereValue.strip('"')
+                self.parsedQuery['whereColumn'] = whereColumn
+                self.parsedQuery['whereOperator'] = operator
+                break
 
     def getParsedQuery(self):
         self.parseQuery()
-        self.assignQueryElements()
+        # self.assignQueryElements()
         return self.parsedQuery
 
     def assignQueryElements(self):
@@ -112,6 +117,7 @@ class Parse:
         havingOperator = self.parsedQuery['havingCondition'][1]
         havingThreshold = self.parsedQuery['havingCondition'][0]
         whereValue = self.parsedQuery['whereValue']
+        whereOperator = self.parsedQuery['whereOperator']
         whereColumnIndex = columns.index(self.parsedQuery['whereColumn'])
 
         elements = {
@@ -121,6 +127,7 @@ class Parse:
             'fromTable': fromTable,
             'whereColumnIndex': whereColumnIndex,
             'whereValue': whereValue,
+            'whereOperator': whereOperator,
             'groupByColumnIndex': self.groupByColumnIndex,
             'havingOperator': havingOperator,
             'havingThreshold': havingThreshold
@@ -131,10 +138,10 @@ class Parse:
 
 
 # if __name__ == "__main__":
-#     query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2 =
-#     "value" group by col6, col7 having col1 >= 3'
+#     query = 'Select col1, col2, col3, count(col4) from table1, table2 where col2
+#     ="value" group by col6, col7 having col1 >= 3'
 #     parser = Parse(query, {'hello':'test'})
 #     q = parser.getParsedQuery()
 #     print(q)
-    # for k, v in q.items():
-    #     print(k, v)
+#     # for k, v in q.items():
+#     #     #     print(k, v)
