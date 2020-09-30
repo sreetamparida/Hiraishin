@@ -1,6 +1,25 @@
 # Hiraishin
+This is a REST-based service for a given `Amazon Product` dataset. This ervice will accept a query in the form of the template provided below.
 
-## Description of Input Dataset
+### Query Template
+```sql
+Group By Template
+SELECT<COLUMNS>,FUNC(COLUMN1)
+WHERE <COLUMN1> = X
+FROM<TABLE>
+GROUP BY <COLUMNS>
+HAVING FUNC(COLUMN1) > X
+```
+
+The service translates the query into **MapReduce jobs** and also into **Spark job**. It should run these two jobs separately and return the following in a **JSON object**:
+- [x] Time taken for Hadoop MapReduce execution.
+- [x] Time taken for Spark execution.
+- [x] Input and output of map and reduce tasks in a chain as they are applied on the data.
+- [x] Spark transformations and actions in the order they are applied.
+- [x] Result of the query.
+
+
+## Desccription of Input Dataset
 There are four tables named as 
 - product
 - category
@@ -54,7 +73,7 @@ There are four tables named as
 
 Refer to section `System Design`(#) along with this description.
 1. User submits query.
-2. `initiate` sends the string query to the `Driver`.
+2. `initiator` sends the string query to the `Driver`.
 3. The `Driver` sends the query to the `Parser` and receives the parsed query.
 4. `Parser` creates a file `elements.json` which stores the breakdown elements of the query.
 5. `Driver` sends the parsed query to the `MRSession` and `Sparkler` to receive the query result.
