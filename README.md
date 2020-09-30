@@ -69,9 +69,11 @@ There are four tables named as
 - **votes** : Number of votes to the review
 - **helpful** : Number of people found the review helpful
 
-## Solution Description
+## System Design
 
-Refer to section `System Design`(#) along with this description.
+![System Design](https://drive.google.com/file/d/1Rgogjy-hPas12Q9VNHoGmCMn8LQPMv2m/view?usp=sharing)
+
+### Description
 1. User submits query.
 2. `initiator` sends the string query to the `Driver`.
 3. The `Driver` sends the query to the `Parser` and receives the parsed query.
