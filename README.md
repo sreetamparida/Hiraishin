@@ -54,7 +54,7 @@ There are four tables named as
 
 Refer to section `System Design`(#) along with this description.
 1. User submits query.
-2. `initiator` sends the string query to the `Driver`.
+2. `initiate` sends the string query to the `Driver`.
 3. The `Driver` sends the query to the `Parser` and receives the parsed query.
 4. `Parser` creates a file `elements.json` which stores the breakdown elements of the query.
 5. `Driver` sends the parsed query to the `MRSession` and `Sparkler` to receive the query result.
